@@ -1,0 +1,55 @@
+<h1> Select available time slot : 40 min</h1>
+
+<table>                         
+  <tr>
+    <th>Time\Day</th>                          
+    <th>Sun</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+  </tr>
+<% @result.each do |row| %>       
+  <tr>
+    <td><%= row[:time] %></td>  
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) %>">
+        <%= row[:sun] %>
+      </a>
+    </td>  
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) + 48 %>">
+        <%= row[:mon] %>
+      </a>
+    </td> 
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) + 96 %>">
+        <%= row[:tue] %>
+      </a>
+    </td> 
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) + 144 %>">
+        <%= row[:wed] %>
+      </a>
+    </td> 
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) + 192 %>">
+        <%= row[:thu] %>
+      </a>
+    </td> 
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) + 240 %>">
+        <%= row[:fri] %>
+      </a>
+    </td> 
+    <td>
+      <a href="/user_view/<%= params[:id] %>/40/<%= @result.find_index(row) + 288 %>">
+        <%= row[:sat] %>
+      </a>
+    </td> 
+  </tr>
+<% end %>                        
+</table>  
+

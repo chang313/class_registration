@@ -1,0 +1,11 @@
+<h1> Tutor <%= @tutor.nickname %> class list </h1>
+
+<ul>
+  <% @class_list.each do |data| %>
+    <li>
+      <p> user : <%= data[:user_nick] %> </p>
+      <p> start at <%= data[:start_time] %> for <%= data[:duration] %> minutes </p>
+
+    </li>
+  <% end %>
+</ul>

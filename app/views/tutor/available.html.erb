@@ -1,0 +1,41 @@
+<h1> Available time slot of tutor <%= @tutor.nickname %></h1>
+
+<table>                         
+  <tr>
+    <th>Time\Day</th>                          
+    <th>Sun</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+  </tr>
+<% @result.each do |row| %>       
+  <tr>
+    <td><%= row[:time] %></td>  
+    <td>
+      <%= row[:sun] %>
+    </td>  
+    <td>
+      <%= row[:mon] %>
+    </td> 
+    <td>
+      <%= row[:tue] %>
+    </td> 
+    <td>
+      <%= row[:wed] %> 
+    </td> 
+    <td>
+      <%= row[:thu] %>
+    </td> 
+    <td>
+      <%= row[:fri] %>
+    </td> 
+    <td>
+      <%= row[:sat] %>
+    </td> 
+  </tr>
+<% end %>                        
+</table>  
+

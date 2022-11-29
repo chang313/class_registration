@@ -1,0 +1,18 @@
+<h1> Welcome tutor <%= @tutor.nickname %>! </h1>
+<h2> Select 'available' to check available time slot of this tutor </h2>
+<h2> Select 'enroll' to check enrolled list of this tutor </h2>
+
+<ul>
+  <li>
+    <a href="/tutor_view/<%= params[:id] %>/available"> 
+      available 
+    </a>
+  </li>
+  <li>
+    <a href="/tutor_view/<%= params[:id] %>/enroll"> 
+      enroll 
+    </a>
+  </li>
+
+</ul>
+

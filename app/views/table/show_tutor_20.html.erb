@@ -1,0 +1,15 @@
+<h1> list of avaialable tutors </h1>
+<h2> click tutor name to enroll at <%= @time.strftime("%m-%d %H:%M") %> time </h2>
+
+<ul>
+  <% @tutors.each do |tutor| %>
+    <li>
+      <a href= "/user_view/<%= params[:id] %>/20/<%= params[:time_index] %>/<%= tutor %>">
+        <%= tutor %>
+      </a>
+      
+            
+    
+    </li>
+  <% end %>
+</ul>
