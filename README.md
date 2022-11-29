@@ -2,7 +2,6 @@
 
 # About the Project
 
----
 
 Class registration page for users and tutors. 
 
@@ -16,14 +15,12 @@ Enrolled class information can be shown as well.
 
 # Built with
 
----
 
 - Ruby 2.7.2
 - Rails 6.1.7
 
 # Data schema
 
----
 
 **User**
 
