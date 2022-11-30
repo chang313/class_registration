@@ -7,7 +7,7 @@ class CreateTables < ActiveRecord::Migration[6.1]
       t.integer :user_id, default: 0
       t.integer :duration, default: 0
 
-      t.timestamps
+      t.index [:tutor_id, :start_time], unique: true
     end
   end
 end

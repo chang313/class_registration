@@ -18,8 +18,7 @@ ActiveRecord::Schema.define(version: 2022_11_27_073051) do
     t.integer "active", default: 1, null: false
     t.integer "user_id", default: 0
     t.integer "duration", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tutor_id", "start_time"], name: "index_tables_on_tutor_id_and_start_time", unique: true
   end
 
   create_table "tutors", force: :cascade do |t|
