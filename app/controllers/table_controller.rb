@@ -5,24 +5,14 @@ class TableController < ApplicationController
     @result = []
 
     # @result is a array that contains each time's "가능" or "불가능" value from sunday to saturday
+    # It has 48 hashes for each time slot
+    # Hash has start time value and "가능" or "불가능" value from sunday to saturday 
     for slot in 0..47 do
       row = []
       for day in 1..7 do
-        data = Table.where(start_time: @current_time)
-        if data
-          active = 2
-          data.each do |slot|
-            active = slot.active
-            if active == 1
-              break
-            end
-          end 
-
-          if active == 1
-            row << "가능"
-          else
-            row << "불가능"
-          end
+        # check whether available tutor exist for each time slot
+        if Table.exists?(start_time: @current_time, active: 1)
+          row << "가능"
         else
           row << "불가능"
         end
@@ -50,11 +40,15 @@ class TableController < ApplicationController
     @current_time = DateTime.new(2022,11,20,0,0)
     @result = []
     
+    # @result is a array that contains each time's "가능" or "불가능" value from sunday to saturday
+    # It has 48 hashes for each time slot
+    # Hash has start time value and "가능" or "불가능" value from sunday to saturday 
     for slot in 0..47 do
       row = []
       for day in 1..7 do
         data = Table.where(start_time: @current_time, active: 1)
         data_next = Table.where(start_time: @current_time + 30.minutes, active: 1)
+        # check whether available tutor exists for current time slot and next time slot
         if data
           if data_next 
             possible = false
@@ -103,7 +97,7 @@ class TableController < ApplicationController
   def show_tutor_20
     @time = DateTime.new(2022,11,20,0,0) + (params[:time_index].to_i*30).minutes
     @available = Table.where(start_time: @time, active: 1)
-    @tutors = []
+    @tutors = [] # available tutor nickname array 
     @available.each do |data|
       tutor_id = data.tutor_id
       tutor = Tutor.find_by(id: tutor_id).nickname
@@ -119,7 +113,7 @@ class TableController < ApplicationController
     @time = DateTime.new(2022,11,20,0,0) + (params[:time_index].to_i*30).minutes
     time_next = @time + 30.minutes
     @available = Table.where(start_time: @time, active: 1)
-    @tutors = []
+    @tutors = [] # available tutor nickname array
     @available.each do |data|
       tutor_id = data.tutor_id
       tutor = Tutor.find_by(id: tutor_id).nickname
@@ -137,6 +131,9 @@ class TableController < ApplicationController
     @time = DateTime.new(2022,11,20,0,0) + (params[:time_index].to_i*30).minutes
     tutor_id = Tutor.find_by(nickname: params[:tutor_nickname])
     @data = Table.find_by(start_time: @time, tutor_id: tutor_id)
+
+    # update selected tutor's data 
+    # user_id, duration, active attributes are updated as below
     @data.update(user_id: params[:id], duration: 20, active: 2)
 
   end
@@ -148,6 +145,8 @@ class TableController < ApplicationController
     @data = Table.find_by(start_time: @time, tutor_id: tutor_id)
     @next_data = Table.find_by(start_time: @time+30.minutes, tutor_id: tutor_id)
 
+    # update selected tutor's current and next time data
+    # user_id, duration, active attributes are updated as below
     @data.update(user_id: params[:id], duration: 30, active: 2)
     @next_data.update(user_id: params[:id], duration: 10, active: 2)
 

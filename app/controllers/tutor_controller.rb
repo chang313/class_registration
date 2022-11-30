@@ -12,9 +12,9 @@ class TutorController < ApplicationController
   # show enrolled class information of the tutor
   def enroll
     @tutor = Tutor.find_by(id: params[:id])
-    @list = Table.where(tutor_id: params[:id], active: 2)
+    @list = Table.where(tutor_id: params[:id], active: 2) # enrolled class list for the tutor
 
-    @class_list = []
+    @class_list = [] # result array that contains tutor nickname, user nickname, class duration, start_time
     @list.each do |data|
       tutor_id = data.tutor_id
       start_time = data.start_time
@@ -50,13 +50,9 @@ class TutorController < ApplicationController
     for slot in 0..47 do
       row = []
       for day in 1..7 do
-        data = Table.find_by(start_time: @current_time, tutor_id: params[:id])
-        if data
-          if data.active == 1
-            row << "가능"
-          else
-            row << "불가능"
-          end
+        # check whether the tutor is available for selected time 
+        if Table.exists?(start_time: @current_time, tutor_id: params[:id], active: 1)
+          row << "가능"
         else
           row << "불가능"
         end
